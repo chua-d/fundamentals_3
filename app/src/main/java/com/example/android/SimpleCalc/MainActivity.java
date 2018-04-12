@@ -102,6 +102,7 @@ public class MainActivity extends Activity {
             operandOne = getOperand(mOperandOneEditText);
             operandTwo = getOperand(mOperandTwoEditText);
         } catch (NumberFormatException nfe) {
+            Log.e(TAG, "NumberFormatException", nfe);
             mResultTextView.setText(getString(R.string.computationError));
             return;
         }
@@ -132,7 +133,13 @@ public class MainActivity extends Activity {
      */
     private static Double getOperand(EditText operandEditText) {
         String operandText = getOperandText(operandEditText);
-        return Double.parseDouble(operandText);
+        if(operandText.isEmpty()) {
+            return 0.0;
+
+        } else {
+            return Double.parseDouble(operandText);
+
+        }
     }
 
     /**
